@@ -14,4 +14,9 @@ class Course extends Model
         'difficulty',
         'is_active',
     ];
+
+    protected $casts = [
+        'fee' => 'decimal:2',
+        'is_active' => 'boolean',
+    ];
 }

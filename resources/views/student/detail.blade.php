@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Details</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Student Details')
+
+@section('content')
 
 <h1>Student Details</h1>
-
-@if(session('success'))
-    <p>{{ session('success') }}</p>
-@endif
-
-<p>
-    <strong>ID:</strong>
-    {{ $student->id }}
-</p>
 
 <p>
     <strong>Name:</strong>
@@ -38,20 +28,22 @@
 
 <p>
     <strong>Date of Birth:</strong>
-    {{ $student->date_of_birth }}
+    {{ $student->date_of_birth?->format('d M Y') }}
 </p>
 
-<br>
+<p>
+    <strong>Age:</strong>
+    {{ $student->age ?? 'Not available' }}
+</p>
 
-<a href="/students/{{ $student->id }}/edit">
-    Edit Student
+<a href="{{ route('students.edit', $student) }}">
+    Edit
 </a>
 
-<br><br>
+|
 
-<a href="/students">
+<a href="{{ route('students.index') }}">
     Back to Students
 </a>
 
-</body>
-</html>
+@endsection

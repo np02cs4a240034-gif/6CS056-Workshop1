@@ -1,134 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Course</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Create Course</h1>
+@section('title', 'Create Student')
 
-@if($errors->any())
-    <div>
-        <h3>Please fix the following errors:</h3>
+@section('content')
 
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+<h1>Create Student</h1>
 
-<form action="/course" method="POST">
+@include('partials.errors')
+
+<form action="{{ route('students.store') }}" method="POST">
 
     @csrf
 
-    <div>
-        <label for="name">Course Name</label>
-
+    <p>
+        <label>Name:</label><br>
         <input
             type="text"
-            id="name"
             name="name"
             value="{{ old('name') }}"
         >
-    </div>
+    </p>
 
-    <br>
-
-    <div>
-        <label for="description">Description</label>
-
-        <textarea
-            id="description"
-            name="description"
-        >{{ old('description') }}</textarea>
-    </div>
-
-    <br>
-
-    <div>
-        <label for="duration">Duration (Weeks)</label>
-
+    <p>
+        <label>Email:</label><br>
         <input
-            type="number"
-            id="duration"
-            name="duration"
-            value="{{ old('duration') }}"
-            min="1"
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
         >
-    </div>
+    </p>
 
-    <br>
-
-    <div>
-        <label for="fee">Fee</label>
-
+    <p>
+        <label>Phone:</label><br>
         <input
-            type="number"
-            id="fee"
-            name="fee"
-            value="{{ old('fee') }}"
-            step="0.01"
-            min="0"
+            type="text"
+            name="phone"
+            value="{{ old('phone') }}"
         >
-    </div>
+    </p>
 
-    <br>
+    <p>
+        <label>Address:</label><br>
+        <textarea name="address">{{ old('address') }}</textarea>
+    </p>
 
-    <div>
-        <label for="difficulty">Difficulty</label>
-
-        <select id="difficulty" name="difficulty">
-
-            <option value="">Select Difficulty</option>
-
-            <option value="Easy"
-                {{ old('difficulty') == 'Easy' ? 'selected' : '' }}>
-                Easy
-            </option>
-
-            <option value="Medium"
-                {{ old('difficulty') == 'Medium' ? 'selected' : '' }}>
-                Medium
-            </option>
-
-            <option value="Hard"
-                {{ old('difficulty') == 'Hard' ? 'selected' : '' }}>
-                Hard
-            </option>
-
-        </select>
-    </div>
-
-    <br>
-
-    <div>
-        <label>
-            <input
-                type="checkbox"
-                name="is_active"
-                value="1"
-                {{ old('is_active', true) ? 'checked' : '' }}
-            >
-
-            Active Course
-        </label>
-    </div>
-
-    <br>
+    <p>
+        <label>Date of Birth:</label><br>
+        <input
+            type="date"
+            name="date_of_birth"
+            value="{{ old('date_of_birth') }}"
+        >
+    </p>
 
     <button type="submit">
-        Create Course
+        Create Student
     </button>
 
 </form>
 
 <br>
 
-<a href="/courses">
-    Back to Courses
+<a href="{{ route('students.index') }}">
+    Back to Students
 </a>
 
-</body>
-</html>
+@endsection
